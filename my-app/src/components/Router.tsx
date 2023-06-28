@@ -1,6 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "pages/Home/Home";
+import List from "pages/List/List";
+import Detail from "pages/Detail/Detail";
+import Add from "pages/Add/Add";
+import NotFound from "pages/NotFound/NotFound";
 
-function Router() {
+export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
