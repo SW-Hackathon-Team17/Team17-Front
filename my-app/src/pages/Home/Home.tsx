@@ -10,6 +10,7 @@ export default function Home() {
           position: "absolute",
           left: 0,
           top: 0,
+          zIndex: 0,
           width: "100%",
         }}
       />
