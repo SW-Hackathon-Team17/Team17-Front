@@ -20,7 +20,7 @@ export default function Header() {
         <Link to="/detail">
           <Button sx={{ mx: 3 }}>발표 연습</Button>
         </Link>
-        <Link to="add">
+        <Link to="/list">
           <Button>대본 리스트</Button>
         </Link>
       </Box>
