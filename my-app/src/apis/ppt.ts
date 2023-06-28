@@ -7,7 +7,7 @@ export const getPptList = async () => {
 };
 
 export interface IPpt {
-  pptId: number;
+  pptIdx: number;
   imgUrl: string;
 }
 
