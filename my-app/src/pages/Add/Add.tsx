@@ -5,8 +5,13 @@ export default function Add() {
   const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
 
   return (
-    <Box sx={{ p: "50px", display: "flex", justifyContent: "center" }}>
-      <Box>
+    <Box sx={{ p: "100px", display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
+        component="img"
+        src="./img/background.png"
+      />
+      <Box sx={{ position: "relative", zIndex: 10 }}>
         <Paper
           sx={{
             width: "500px",
@@ -38,7 +43,16 @@ export default function Add() {
         </Typography>
       </Box>
 
-      <Paper sx={{ width: "500px", height: "800px", ml: 5, p: "20px" }}>
+      <Paper
+        sx={{
+          width: "500px",
+          height: "800px",
+          ml: 5,
+          p: "20px",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
         <Paper
           sx={{
             width: "100%",

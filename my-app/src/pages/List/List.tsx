@@ -28,13 +28,26 @@ export default function List() {
 
   return (
     <Box sx={{ px: "100px", py: "70px" }}>
-      <Typography sx={{ mb: "70px" }} variant="h6">
+      <Box
+        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
+        component="img"
+        src="./img/background.png"
+      />
+      <Typography
+        sx={{ mb: "70px", position: "relative", zIndex: 10 }}
+        variant="h6"
+      >
         이전 발표 기록
       </Typography>
       <Grid
         container
         gap={5}
-        sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          position: "relative",
+          zIndex: 10,
+        }}
       >
         {data?.map((ppt: IPpt) => (
           <Grid key={ppt.pptIdx}>
