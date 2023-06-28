@@ -4,6 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
+import "./style/index.css";
 
 const queryClient = new QueryClient();
 
