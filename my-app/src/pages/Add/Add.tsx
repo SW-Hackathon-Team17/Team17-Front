@@ -6,13 +6,17 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+
 import React, { useCallback, useRef, useState } from "react";
 import CancelButton from "components/CancelButton";
 import ScriptPage from "components/Add/ScriptPage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextareaDecorators from "components/Detail/TextareaDecorators";
 import KeywordButton from "components/KeywordButton";
+
+import Dictaphone from "components/Audio/B1Q3";
+import ImageUpload from "components/Add/ImageUpload";
+
 export default function Add() {
   const [script, setScript] = useState<string>("");
   const [nowPage, setNowPage] = useState<number>(1);
@@ -21,55 +25,6 @@ export default function Add() {
   const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
 
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
-
-  const inputRef = useRef(null);
-  const onUploadImageButtonClick = useCallback(() => {
-    if (!inputRef.current) {
-      return;
-    }
-
-    (inputRef.current as any).click();
-  }, []);
-
-  const onImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const file = e.target.files;
-    console.log(file);
-    if (!file) return null;
-    console.log("check", file);
-
-    // const convertedFile = await Heic2Jpg(file[0]);
-
-    // const lowCapacityFile = await compressedFile(convertedFile);
-
-    // const storageRef = ref(storage, `files/${file[0].name}`);
-    // const uploadTask = uploadBytesResumable(storageRef, lowCapacityFile);
-
-    // uploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     const progress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //   },
-    //   (error) => {
-    //     switch (error.code) {
-    //       case "storage/canceld":
-    //         alert("Upload has been canceled");
-    //         break;
-    //     }
-    //   },
-    //   () => {
-    //     getDownloadURL(storageRef).then((downloadURL) => {
-    //       console.log("File available at", downloadURL);
-
-    //       //   setImageURL(downloadURL);
-    //       const prev = getValues("images");
-    //       setValue("images", [...prev, downloadURL]);
-    //     });
-    //   }
-    // );
-  };
 
   return (
     <Box
@@ -96,6 +51,7 @@ export default function Add() {
               alignItems: "center",
             }}
           >
+            <Dictaphone />
             <CancelButton setLeftVisible={setLeftVisible} />
             <Paper
               sx={{
@@ -109,19 +65,8 @@ export default function Add() {
                 height: "70px",
               }}
             >
-              <FileUploadIcon
-                onClick={onUploadImageButtonClick}
-                sx={{ fontSize: "35px" }}
-              />
+              <ImageUpload />
             </Paper>
-            <input
-              hidden
-              type="file"
-              // accept="image/*"
-              accept=".jpg,.jpeg,.png,.gif,.bmp,.heic,.heif,.pptx"
-              ref={inputRef}
-              onChange={onImageChange}
-            />
           </Paper>
 
           <Box sx={{ mt: "20px", color: "white" }}>
