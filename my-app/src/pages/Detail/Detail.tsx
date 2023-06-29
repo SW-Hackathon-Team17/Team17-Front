@@ -17,9 +17,7 @@ export default function Detail() {
   console.log(state);
 
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
-  const handleCancelClick = () => {
-    setLeftVisible(false);
-  };
+
   return (
     <Box sx={{ p: "100px", display: "flex", justifyContent: "center" }}>
       <Box
@@ -29,16 +27,16 @@ export default function Detail() {
       />
       {leftVisible && (
         <Box sx={{ position: "relative", zIndex: 10 }}>
-          <CancelButton onClick={handleCancelClick} />
+          <CancelButton setLeftVisible={setLeftVisible} />
 
           <Paper
             sx={{
-              width: "500px",
+              width: "700px",
               height: "400px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              px: "20px",
+              px: "30px",
               pt: "50px",
               pb: "70px",
               backgroundColor: "lightgray",

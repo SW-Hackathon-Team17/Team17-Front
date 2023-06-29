@@ -2,10 +2,13 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-export default function CancelButton({ onClick }: any) {
+export default function CancelButton({ setLeftVisible }: any) {
+  const handleCancelClick = () => {
+    setLeftVisible(false);
+  };
   return (
     <IconButton
-      onClick={onClick}
+      onClick={handleCancelClick}
       sx={{ position: "absolute", right: "-25px", top: "-25px" }}
       aria-label="cancel"
     >
