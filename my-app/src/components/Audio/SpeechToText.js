@@ -1,9 +1,10 @@
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-const Dictaphone = () => {
+const Dictaphone = ({ playRef, stopRef }) => {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
 
   useEffect(() => {
@@ -13,7 +14,7 @@ const Dictaphone = () => {
       intervalId = setInterval(() => {
         console.log(transcript);
         resetTranscript();
-      }, 1000);
+      }, 300);
     }
 
     return () => {
@@ -36,11 +37,15 @@ const Dictaphone = () => {
   }
 
   return (
-    <div>
-      <button onClick={startListening}>Start</button>
-      <button onClick={stopListening}>Stop</button>
+    <Box sx={{ display: "none" }}>
+      <button ref={playRef} onClick={startListening}>
+        Start
+      </button>
+      <button ref={stopRef} onClick={stopListening}>
+        Stop
+      </button>
       <p>{transcript}</p>
-    </div>
+    </Box>
   );
 };
 

@@ -18,9 +18,7 @@ export interface IKeywords {
 }
 
 export const getKeywords = async (formIdx: number, pgNum: number) => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_BASE_URL}/form/${formIdx}/${pgNum}/keywords`
-  );
+  const response = await axios.get(`/form/${formIdx}/${pgNum}/keywords`);
   return response.data;
 };
 
@@ -33,13 +31,13 @@ export const getKeywords = async (formIdx: number, pgNum: number) => {
  */
 
 export const saveKeywords = async (
-  formIdx: number,
+  formIdx: number | null,
   pgNum: number,
   keywords: IKeyword[]
 ) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_BASE_URL}/form/${formIdx}/${pgNum}/keywords`,
-    { keywords }
+    `/form/${formIdx}/${pgNum}/keywords`,
+    keywords
   );
   return response;
 };

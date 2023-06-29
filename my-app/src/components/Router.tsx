@@ -13,8 +13,9 @@ export default function Router() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/list/:id" element={<Detail />} />
         <Route path="/list" element={<List />} />
-        <Route path={`/list/:id`} element={<Detail />} />
         <Route path="/add" element={<Add />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

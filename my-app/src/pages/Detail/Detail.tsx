@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { IPpt } from "apis/ppt";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CancelButton from "components/CancelButton";
 import Timer from "components/Detail/Timer";
 import ScriptPage from "components/Add/ScriptPage";
@@ -17,34 +17,28 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ProgressBar from "components/Detail/ProgressBar";
 import { useQueries } from "@tanstack/react-query";
-import { getScript } from "apis/script";
+import { getData, getScript } from "apis/script";
 import { m } from "framer-motion";
 import { getKeywords } from "apis/keyword";
+import SpeechToText from "components/Audio/SpeechToText";
+
+import image from "./img/background.png";
 export default function Detail() {
   const [nowPage, setNowPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 
-  // const results = useQueries({
-  //   queries: [
-  //     {
-  //       queryKey: ["script", nowPage],
-  //       queryFn: () => getScript(stateTyped.formIdx, nowPage),
-  //       enabled: !!nowPage,
-  //     },
-  //     {
-  //       queryKey: ["keywords", nowPage],
-  //       queryFn: () => getKeywords(stateTyped.formIdx, nowPage),
-  //       enabled: !!nowPage,
-  //     },
-  //   ],
-  // });
+  useEffect(() => {
+    getData(stateTyped.formIdx, nowPage).then((res) => {
+      setScript(res[0].script);
+      setKeywords(res[1]);
+    });
+  }, [nowPage]);
 
-  // useEffect(() => {
-  //   results[0].refetch();
-  //   results[1].refetch();
-  // }, [nowPage]);
-
-  const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
+  const [keywords, setKeywords] = useState([
+    { keyword: "봉사", level: 1 },
+    { keyword: "발표 시작", level: 2 },
+    { keyword: "Vollon", level: 1 },
+  ]);
   const { state } = useLocation();
   const stateTyped = state as IPpt;
   const [script, setScript] = useState<string>("대본 예시~~~~~");
@@ -62,9 +56,14 @@ export default function Detail() {
   return (
     <Box sx={{ p: "100px", display: "flex", justifyContent: "center" }}>
       <Box
-        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
-        component="img"
-        src="./img/background.png"
+        component={"img"}
+        sx={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: "100%",
+        }}
+        src={"https://team17-buckets.s3.ap-northeast-2.amazonaws.com/002.png"}
       />
       {leftVisible && (
         <Box sx={{ position: "relative", zIndex: 10 }}>
@@ -102,7 +101,7 @@ export default function Detail() {
               onChange={handleChange}
             />
           </Paper>
-          <Timer setNowPage={setNowPage} />
+          <Timer setPage={setNowPage} />
         </Box>
       )}
 
@@ -130,9 +129,10 @@ export default function Detail() {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Paper
             sx={{
+              position: "relative",
               width: "100%",
               height: "500px",
-              mb: "30px",
+              mb: "15px",
               pt: "10px",
               px: "10px",
               pb: "50px",
@@ -145,15 +145,24 @@ export default function Detail() {
                 flexWrap: "wrap",
                 gap: "10px",
                 mb: "30px",
+                minHeight: "300px",
               }}
             >
               {keywords.map((keyword, index) => (
-                <KeywordButton text={keyword} index={index} />
+                <KeywordButton
+                  key={index}
+                  text={keyword.keyword}
+                  index={index}
+                  level={keyword.level}
+                />
               ))}
             </Box>
             <Button
-              color="success"
-              sx={{ height: "30px", mb: "10px" }}
+              color="primary"
+              sx={{
+                height: "30px",
+                mb: "10px",
+              }}
               onClick={() => setIsScriptVisible((prev) => !prev)}
             >
               {isScriptVisible ? (
@@ -164,10 +173,10 @@ export default function Detail() {
               발표 보기
             </Button>
 
-            {isScriptVisible && <p>script</p>}
+            {isScriptVisible && <p>{script}</p>}
           </Paper>
         </Box>
-        <Typography variant="body1" sx={{ mb: "10px" }}>
+        <Typography variant="body1" sx={{ mb: "0px" }}>
           키워드 성공률
         </Typography>
         <ProgressBar progress={progress} />

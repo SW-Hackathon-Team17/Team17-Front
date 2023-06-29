@@ -13,7 +13,7 @@ export default function CancelButton({ setLeftVisible }: any) {
       aria-label="cancel"
     >
       <Badge color="error">
-        <CancelIcon sx={{ fontSize: "40px" }} />
+        <CancelIcon sx={{ fontSize: "40px", color: "#386E7E" }} />
       </Badge>
     </IconButton>
   );
