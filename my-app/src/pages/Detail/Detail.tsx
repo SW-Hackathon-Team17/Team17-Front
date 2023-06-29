@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { IPpt } from "apis/ppt";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CancelButton from "components/CancelButton";
 import Timer from "components/Detail/Timer";
 import ScriptPage from "components/Add/ScriptPage";
@@ -16,17 +16,39 @@ import KeywordButton from "components/KeywordButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ProgressBar from "components/Detail/ProgressBar";
+import { useQueries } from "@tanstack/react-query";
+import { getScript } from "apis/script";
+import { m } from "framer-motion";
+import { getKeywords } from "apis/keyword";
 export default function Detail() {
-  const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
-  const { state } = useLocation();
-
-  const [script, setScript] = useState<string>("대본 예시~~~~~");
-  const [isScriptVisible, setIsScriptVisible] = useState<boolean>(false);
-
-  const stateTyped = state as IPpt;
-
   const [nowPage, setNowPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+
+  // const results = useQueries({
+  //   queries: [
+  //     {
+  //       queryKey: ["script", nowPage],
+  //       queryFn: () => getScript(stateTyped.formIdx, nowPage),
+  //       enabled: !!nowPage,
+  //     },
+  //     {
+  //       queryKey: ["keywords", nowPage],
+  //       queryFn: () => getKeywords(stateTyped.formIdx, nowPage),
+  //       enabled: !!nowPage,
+  //     },
+  //   ],
+  // });
+
+  // useEffect(() => {
+  //   results[0].refetch();
+  //   results[1].refetch();
+  // }, [nowPage]);
+
+  const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
+  const { state } = useLocation();
+  const stateTyped = state as IPpt;
+  const [script, setScript] = useState<string>("대본 예시~~~~~");
+  const [isScriptVisible, setIsScriptVisible] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setNowPage(value);

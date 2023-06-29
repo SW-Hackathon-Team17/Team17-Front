@@ -1,6 +1,7 @@
 import { useCallback, useRef } from "react";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+import { postPpt } from "apis/ppt";
 export default function ImageUpload() {
   const inputRef = useRef(null);
   const onUploadImageButtonClick = useCallback(() => {
@@ -13,9 +14,12 @@ export default function ImageUpload() {
 
   const onImageChange = async (e) => {
     e.preventDefault();
+
     const file = e.target.files;
 
     if (!file) return null;
+    console.log(file);
+    postPpt(file[0]);
 
     // const convertedFile = await Heic2Jpg(file[0]);
 

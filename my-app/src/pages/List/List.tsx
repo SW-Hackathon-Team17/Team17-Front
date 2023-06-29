@@ -4,28 +4,30 @@ import { useQuery } from "@tanstack/react-query";
 import { IPpt, IPptList, getPptList } from "apis/ppt";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 export default function List() {
-  const data = [
-    {
-      formIdx: 1,
-      imgUrl:
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-    },
-    {
-      formIdx: 2,
-      imgUrl:
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
-    },
-  ];
+  // const data = [
+  //   {
+  //     formIdx: 1,
+  //     imgUrl:
+  //       "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+  //   },
+  //   {
+  //     formIdx: 2,
+  //     imgUrl:
+  //       "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+  //   },
+  // ];
 
-  //   const { data, isLoading } = useQuery<IPptList>(["ppts", "list"], () =>
-  //     getPptList()
-  //     ,{
-  //         onSuccess: (list) => {
-  //             console.log(list);
-  //         }
-  //     }
-  //   );
+  const { data, isLoading } = useQuery(["ppts", "list"], () => getPptList(), {
+    onSuccess: (list) => {
+      console.log(list);
+    },
+  });
+  // useEffect(() => {
+  //   getPptList();
+  //   console.log("list");
+  // }, []);
 
   return (
     <Box sx={{ px: "100px", py: "70px" }}>
