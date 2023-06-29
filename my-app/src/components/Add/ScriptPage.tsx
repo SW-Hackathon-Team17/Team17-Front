@@ -2,12 +2,14 @@ import { Box, IconButton, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useMatch } from "react-router-dom";
+import { useState } from "react";
 
 interface IProps {
   nowPage: Number;
   maxPage: Number;
   setMaxPage: any;
   setNowPage: any;
+  isPresentation?: boolean;
 }
 
 export default function ScriptPage({
@@ -15,6 +17,8 @@ export default function ScriptPage({
   maxPage,
   setMaxPage,
   setNowPage,
+
+  isPresentation,
 }: IProps) {
   const addMatch = useMatch("/add");
 
@@ -41,15 +45,19 @@ export default function ScriptPage({
         alignItems: "center",
       }}
     >
-      <Typography variant="body2">{nowPage + "/" + maxPage}</Typography>
-      <Box>
-        <IconButton id="left" onClick={handlePage}>
-          <KeyboardArrowLeftIcon sx={{ mr: 2 }} />
-        </IconButton>
-        <IconButton id="right" onClick={handlePage}>
-          <KeyboardArrowRightIcon />
-        </IconButton>
-      </Box>
+      <Typography variant="body1" sx={{ mb: 1 }}>
+        {nowPage + " / " + maxPage}
+      </Typography>
+      {addMatch && isPresentation === false && (
+        <Box>
+          <IconButton id="left" onClick={handlePage}>
+            <KeyboardArrowLeftIcon sx={{ mr: 2 }} />
+          </IconButton>
+          <IconButton id="right" onClick={handlePage}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Box>
+      )}
     </Box>
   );
 }

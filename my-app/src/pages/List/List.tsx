@@ -37,8 +37,8 @@ export default function List() {
         src="./img/background.png"
       />
       <Typography
-        sx={{ mb: "70px", position: "relative", zIndex: 10 }}
-        variant="h6"
+        sx={{ my: "70px", position: "relative", zIndex: 10, color: "white" }}
+        variant="h5"
       >
         이전 발표 기록
       </Typography>
@@ -53,7 +53,7 @@ export default function List() {
         }}
       >
         {data?.map((ppt: IPpt) => (
-          <Link to={`/list/${ppt.formIdx}`} state={ppt}>
+          <Link to={`/list/${ppt.formIdx + ""}`} state={ppt}>
             <Grid key={ppt.formIdx}>
               {" "}
               <Paper sx={{ p: 5, width: "500px" }}>
@@ -62,33 +62,35 @@ export default function List() {
             </Grid>
           </Link>
         ))}
-        <Paper
-          sx={{
-            backgroundColor: "lightgray",
-            p: 5,
-            width: "500px",
-            height: "300px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Box
+        <Link to="/add">
+          <Paper
             sx={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "35px",
-              backgroundColor: "white",
+              backgroundColor: "lightgray",
+              p: 5,
+              width: "500px",
+              height: "300px",
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <AddIcon sx={{ fontSize: "35px" }} />
-          </Box>
-          <Typography sx={{ mt: 2 }}>페이지 추가하기</Typography>
-        </Paper>
+            <Box
+              sx={{
+                width: "60px",
+                height: "60px",
+                borderRadius: "35px",
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <AddIcon sx={{ fontSize: "35px" }} />
+            </Box>
+            <Typography sx={{ mt: 2 }}>페이지 추가하기</Typography>
+          </Paper>
+        </Link>
       </Grid>
     </Box>
   );

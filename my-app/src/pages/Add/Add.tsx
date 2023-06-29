@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Grid,
@@ -17,15 +18,66 @@ import KeywordButton from "components/KeywordButton";
 import Dictaphone from "components/Audio/B1Q3";
 import ImageUpload from "components/Add/ImageUpload";
 import SpeechToText from "components/Audio/SpeechToText";
+import { postData, saveScript } from "apis/script";
+import { saveKeywords } from "apis/keyword";
+import zIndex from "@mui/material/styles/zIndex";
+import axios from "axios";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function Add() {
   const [script, setScript] = useState<string>("");
   const [nowPage, setNowPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(1);
 
-  const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
-
+  const [keywords, setKeywords] = useState([
+    { keyword: "봉사", level: 1 },
+    { keyword: "발표 시작", level: 2 },
+    { keyword: "Vollon", level: 1 },
+  ]);
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
+
+  const [formIdx, setFormIdx] = useState<number>(0);
+
+  // const [isPpt , setIsPpt] = useState<boolean>(false);
+
+  const handleSave = async () => {
+    if (keywords.length !== 0 && script.length !== 0) {
+      const newPost = [
+        {
+          script: script,
+        },
+        keywords,
+      ];
+
+      postData(formIdx, nowPage, newPost).then((res) => {
+        if (res.data.formIdx) {
+          setFormIdx(res.data.formIdx);
+          console.log(newPost, res.data.formIdx);
+          alert("저장되었습니다.");
+        }
+      });
+    }
+  };
+
+  const handleClick = (index: number) => {
+    setKeywords((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+  };
+
+  const handleLevelBalance = (index: any) => {
+    if (keywords[index].level === 1) {
+      setKeywords((prev) => [
+        ...prev.slice(0, index),
+        { keyword: prev[index].keyword, level: 2 },
+        ...prev.slice(index + 1),
+      ]);
+    } else {
+      setKeywords((prev) => [
+        ...prev.slice(0, index),
+        { keyword: prev[index].keyword, level: 1 },
+        ...prev.slice(index + 1),
+      ]);
+    }
+  };
 
   return (
     <Box
@@ -50,25 +102,37 @@ export default function Add() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "rgba(255,255,255,0.7)",
             }}
           >
             {/* <Dictaphone /> */}
-            <SpeechToText />
+
             <CancelButton setLeftVisible={setLeftVisible} />
-            <Paper
+            <Box
               sx={{
-                border: 1,
-                borderColor: "lightgray",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: "100%",
-                width: "70px",
-                height: "70px",
+                backgroundColor: "inherit",
+                border: 1,
+                borderStyle: "dotted",
+                // borderRadius: "100%",
+                width: "500px",
+                height: "400px",
               }}
             >
               <ImageUpload />
-            </Paper>
+              <Typography
+                variant="h4"
+                sx={{
+                  position: "absolute",
+                  bottom: 400,
+                  color: "black",
+                }}
+              >
+                PPT 놓기
+              </Typography>
+            </Box>
           </Paper>
 
           <Box sx={{ mt: "20px", color: "white" }}>
@@ -84,6 +148,7 @@ export default function Add() {
 
       <Paper
         sx={{
+          backgroundColor: "rgba(255,255,255,0.5)",
           width: "500px",
           height: "700px",
           py: "30px",
@@ -97,13 +162,13 @@ export default function Add() {
       >
         <Paper
           sx={{
+            backgroundColor: "rgba(255,255,255)",
             width: "100%",
             height: "300px",
             mb: "30px",
             pt: "10px",
             px: "10px",
             pb: "90px",
-            backgroundColor: "lightgray",
           }}
         >
           <ScriptPage
@@ -119,20 +184,24 @@ export default function Add() {
 
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "end",
             }}
           >
-            <IconButton>
+            {/* <IconButton>
               <DeleteIcon />
-            </IconButton>
+            </IconButton> */}
             <Box>
               <Button
                 variant="contained"
-                sx={{ mr: "10px", borderRadius: "25px" }}
+                sx={{
+                  backgroundColor: "#386E7E",
+
+                  ":hover": {
+                    backgroundColor: "#6C85BD", // Or whatever color you want
+                    // Override other styles on hover if needed
+                  },
+                }}
               >
-                대본 저장
-              </Button>
-              <Button variant="contained" sx={{ borderRadius: "25px" }}>
                 키워드 추출
               </Button>
             </Box>
@@ -144,21 +213,56 @@ export default function Add() {
             gap: "10px",
             width: "100%",
             height: "300px",
-
             display: "flex",
             flexWrap: "wrap",
             position: "relative",
           }}
         >
           {keywords.map((keyword, index) => (
-            <KeywordButton text={keyword} index={index} />
+            <Box sx={{ position: "relative" }}>
+              <IconButton
+                sx={{
+                  width: "20px",
+                  height: "20px",
+                  position: "absolute",
+                  right: "-10px",
+                  top: "-10px",
+                  zIndex: "10",
+                }}
+                onClick={() => handleClick(index)}
+              >
+                <CancelIcon />
+              </IconButton>
+              <KeywordButton
+                key={index}
+                text={keyword.keyword}
+                level={keyword.level}
+                index={index}
+                onClick={handleLevelBalance}
+              />
+            </Box>
           ))}
-          <Typography sx={{ position: "absolute", bottom: "20px" }}>
+
+          <Typography
+            sx={{ position: "absolute", bottom: "5px", fontWeight: "400" }}
+          >
             키워드 클릭시 중요도 표시 가능합니다 :)
           </Typography>
         </Paper>
-        <Button variant="contained" sx={{ mt: "20px" }}>
-          키워드 저장
+        <Button
+          variant="contained"
+          onClick={handleSave}
+          sx={{
+            mt: "20px",
+            backgroundColor: "#386E7E",
+            width: "150px",
+            ":hover": {
+              backgroundColor: "#6C85BD", // Or whatever color you want
+              // Override other styles on hover if needed
+            },
+          }}
+        >
+          저장 하기
         </Button>
       </Paper>
     </Box>

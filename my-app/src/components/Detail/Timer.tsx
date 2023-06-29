@@ -5,7 +5,11 @@ import StopCircleIcon from "@mui/icons-material/StopCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import SpeechToText from "components/Audio/SpeechToText";
 export default function Timer({ setPage }: any) {
+  const playRef = useRef();
+  const stopRef = useRef();
+
   const converter = (secs: number) => {
     const minutes = Math.floor(secs / 60);
     const seconds = secs % 60;
@@ -19,6 +23,7 @@ export default function Timer({ setPage }: any) {
 
   const handleStop = () => {
     if (interval.current) {
+      (stopRef.current as any).click();
       setIsPlaying("pause");
       clearInterval(interval.current);
       interval.current = null;
@@ -27,6 +32,7 @@ export default function Timer({ setPage }: any) {
 
   const handlePlay = () => {
     if (!interval.current) {
+      (playRef.current as any).click();
       setIsPlaying("playing");
       interval.current = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
@@ -38,6 +44,7 @@ export default function Timer({ setPage }: any) {
   const [isPlaying, setIsPlaying] = useState<string>("reset");
 
   const handleReset = () => {
+    (stopRef.current as any).click();
     setSeconds(0);
     setIsPlaying("reset");
     setPage(0);
@@ -58,6 +65,7 @@ export default function Timer({ setPage }: any) {
         alignItems: "center",
       }}
     >
+      <SpeechToText playRef={playRef} stopRef={stopRef} />
       <Button
         sx={{
           mr: 5,

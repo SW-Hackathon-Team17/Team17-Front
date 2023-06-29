@@ -13,9 +13,7 @@ export interface IScript {
 }
 
 export const getScript = async (formIdx: number, pgNum: number) => {
-  const response = await axios.get(
-    `${process.env.REACT_APP_BASE_URL}/form/${formIdx}/${pgNum}/script`
-  );
+  const response = await axios.get(`/form/${formIdx}/${pgNum}/script`);
   return response.data;
 };
 
@@ -28,15 +26,12 @@ export const getScript = async (formIdx: number, pgNum: number) => {
  */
 
 export const saveScript = async (
-  formIdx: number,
+  formIdx: number | null,
   pgNum: number,
   script: string
 ) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_BASE_URL}/form/${formIdx}/${pgNum}/script`,
-    { script }
-  );
-  return response;
+  const response = await axios.post(`/form/${formIdx}/${pgNum}/script`, script);
+  return response.data;
 };
 
 /**
@@ -71,4 +66,19 @@ export const deleteScript = (formIdx: number, pgNum: number) => {
     `${process.env.REACT_APP_BASE_URL}/form/${formIdx}/${pgNum}/script`
   );
   return response;
+};
+
+export const postData = async (formIdx: number, pgNum: number, data: any) => {
+  const response = await axios.post(
+    `http://127.0.0.1:5000/form/${formIdx}/${pgNum}/data`,
+    data
+  );
+  return response;
+};
+
+export const getData = async (formIdx: number, pgNum: number) => {
+  const response = await axios.get(
+    `http://127.0.0.1:5000/form/${formIdx}/${pgNum}/data`
+  );
+  return response.data;
 };
