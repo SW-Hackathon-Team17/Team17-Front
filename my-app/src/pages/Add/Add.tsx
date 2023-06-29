@@ -9,9 +9,8 @@ import {
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { useState } from "react";
 import CancelButton from "components/CancelButton";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ScriptPage from "components/Add/ScriptPage";
+import DeleteIcon from "@mui/icons-material/Delete";
 export default function Add() {
   const [nowPage, setNowPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(1);
@@ -62,10 +61,14 @@ export default function Add() {
             </Paper>
           </Paper>
 
-          <Typography>발표 자료 없이 이용 가능합니다 ☺️</Typography>
-          <Typography>
-            발표 자료를 업로드하지 않으신다면 버튼을 눌러주세요
-          </Typography>
+          <Box sx={{ mt: "20px", color: "white" }}>
+            <Typography variant="h6">
+              발표 자료 없이 이용 가능합니다 😀
+            </Typography>
+            <Typography variant="h6">
+              발표 자료를 업로드하지 않으신다면 🚫 버튼을 눌러주세요
+            </Typography>
+          </Box>
         </Box>
       )}
 
@@ -112,18 +115,23 @@ export default function Add() {
 
               display: "flex",
               alignItems: "center",
-              justifyContent: "end",
+              justifyContent: "space-between",
             }}
           >
-            <Button
-              variant="contained"
-              sx={{ mr: "10px", borderRadius: "25px" }}
-            >
-              대본 저장
-            </Button>
-            <Button variant="contained" sx={{ borderRadius: "25px" }}>
-              키워드 추출
-            </Button>
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
+            <Box>
+              <Button
+                variant="contained"
+                sx={{ mr: "10px", borderRadius: "25px" }}
+              >
+                대본 저장
+              </Button>
+              <Button variant="contained" sx={{ borderRadius: "25px" }}>
+                키워드 추출
+              </Button>
+            </Box>
           </Box>
         </Paper>
         <Paper
@@ -131,7 +139,7 @@ export default function Add() {
             p: "10px",
             gap: "10px",
             width: "100%",
-            height: "350px",
+            height: "300px",
 
             display: "flex",
             flexWrap: "wrap",
@@ -160,6 +168,9 @@ export default function Add() {
             키워드 클릭시 중요도 표시 가능합니다 :)
           </Typography>
         </Paper>
+        <Button variant="contained" sx={{ mt: "20px" }}>
+          키워드 저장
+        </Button>
       </Paper>
     </Box>
   );

@@ -1,12 +1,24 @@
-import { Box, Pagination, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Pagination,
+  Paper,
+  Typography,
+} from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { Location, useLocation } from "react-router-dom";
 import { IPpt } from "apis/ppt";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CancelButton from "components/CancelButton";
-
+import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import StopCircleIcon from "@mui/icons-material/StopCircle";
+import PauseCircleIcon from "@mui/icons-material/PauseCircle";
+import Timer from "components/Detail/Timer";
 export default function Detail() {
   const { state } = useLocation();
+
   const stateTyped = state as IPpt;
 
   const [page, setPage] = useState(0);
@@ -31,8 +43,8 @@ export default function Detail() {
 
           <Paper
             sx={{
-              width: "700px",
-              height: "400px",
+              width: "650px",
+              height: "380px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -53,7 +65,7 @@ export default function Detail() {
               sx={{
                 position: "absolute",
                 backgroundColor: "white",
-                top: "480px",
+                top: "450px",
                 mx: "auto",
               }}
               count={10}
@@ -61,6 +73,7 @@ export default function Detail() {
               onChange={handleChange}
             />
           </Paper>
+          <Timer setPage={setPage} />
         </Box>
       )}
 
@@ -72,6 +85,9 @@ export default function Detail() {
           p: "20px",
           position: "relative",
           zIndex: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Paper
