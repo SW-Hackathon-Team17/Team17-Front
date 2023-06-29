@@ -6,19 +6,21 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { Location, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { IPpt } from "apis/ppt";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CancelButton from "components/CancelButton";
-import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import StopCircleIcon from "@mui/icons-material/StopCircle";
-import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import Timer from "components/Detail/Timer";
 import ScriptPage from "components/Add/ScriptPage";
+import KeywordButton from "components/KeywordButton";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 export default function Detail() {
+  const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
   const { state } = useLocation();
+
+  const [script, setScript] = useState<string>("대본 예시~~~~~");
+  const [isScriptVisible, setIsScriptVisible] = useState<boolean>(false);
 
   const stateTyped = state as IPpt;
 
@@ -82,7 +84,7 @@ export default function Detail() {
       <Paper
         sx={{
           width: "500px",
-          height: "800px",
+          height: "700px",
           ml: 5,
           p: "20px",
           position: "relative",
@@ -90,6 +92,8 @@ export default function Detail() {
           display: "flex",
           flexDirection: "column",
           alignItems: "space-between",
+
+          backgroundColor: "lightgray",
         }}
       >
         <ScriptPage
@@ -98,37 +102,48 @@ export default function Detail() {
           setMaxPage={setMaxPage}
           setNowPage={setNowPage}
         />
-
-        <Paper
-          sx={{
-            width: "100%",
-            height: "350px",
-            mb: "30px",
-            pt: "10px",
-            px: "10px",
-            pb: "50px",
-            backgroundColor: "lightgray",
-          }}
-        >
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Paper
             sx={{
               width: "100%",
-              height: "100%",
+              height: "500px",
+              mb: "30px",
+              pt: "10px",
+              px: "10px",
+              pb: "50px",
               backgroundColor: "white",
             }}
-          ></Paper>
-        </Paper>
-        <Paper
-          sx={{
-            p: "10px",
-            gap: "10px",
-            width: "100%",
-            height: "350px",
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "10px",
+                mb: "30px",
+              }}
+            >
+              {keywords.map((keyword, index) => (
+                <KeywordButton text={keyword} index={index} />
+              ))}
+            </Box>
+            <Button
+              color="success"
+              sx={{ height: "30px", mb: "10px" }}
+              onClick={() => setIsScriptVisible((prev) => !prev)}
+            >
+              {isScriptVisible ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}{" "}
+              발표 보기
+            </Button>
 
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        ></Paper>
+            {isScriptVisible && <p>script</p>}
+          </Paper>
+        </Box>
+
+        <Button variant="contained">발표 연습완료</Button>
       </Paper>
     </Box>
   );

@@ -11,7 +11,10 @@ import { useState } from "react";
 import CancelButton from "components/CancelButton";
 import ScriptPage from "components/Add/ScriptPage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TextareaDecorators from "components/Detail/TextareaDecorators";
+import KeywordButton from "components/KeywordButton";
 export default function Add() {
+  const [script, setScript] = useState<string>("");
   const [nowPage, setNowPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(1);
 
@@ -75,7 +78,7 @@ export default function Add() {
       <Paper
         sx={{
           width: "500px",
-          height: "800px",
+          height: "700px",
           py: "30px",
           px: "40px",
           position: "relative",
@@ -102,13 +105,7 @@ export default function Add() {
             setMaxPage={setMaxPage}
             setNowPage={setNowPage}
           />
-          <Paper
-            sx={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "white",
-            }}
-          ></Paper>
+          <TextareaDecorators script={script} setScript={setScript} />
           <Box
             sx={{
               height: "50px",
@@ -147,22 +144,7 @@ export default function Add() {
           }}
         >
           {keywords.map((keyword, index) => (
-            <Box
-              sx={{
-                display: "flex",
-                borderRadius: "20px",
-                justifyContent: "center",
-                alignItems: "center",
-                px: "30px",
-                height: "40px",
-                backgroundColor: "green",
-
-                color: "white",
-              }}
-              key={index}
-            >
-              <Typography sx={{ fontSize: "17px" }}>{keyword}</Typography>
-            </Box>
+            <KeywordButton text={keyword} index={index} />
           ))}
           <Typography sx={{ position: "absolute", bottom: "20px" }}>
             키워드 클릭시 중요도 표시 가능합니다 :)
