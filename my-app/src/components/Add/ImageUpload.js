@@ -4,7 +4,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { postPpt } from "apis/ppt";
 import { motion } from "framer-motion";
 import { Box, Typography } from "@mui/material";
-export default function ImageUpload() {
+export default function ImageUpload({ setPptSlides }) {
   const inputRef = useRef(null);
   const onUploadImageButtonClick = useCallback(() => {
     if (!inputRef.current) {
@@ -21,39 +21,8 @@ export default function ImageUpload() {
 
     if (!file) return null;
     console.log(file);
-    postPpt(file[0]);
-
-    // const convertedFile = await Heic2Jpg(file[0]);
-
-    // const lowCapacityFile = await compressedFile(convertedFile);
-
-    // const storageRef = ref(storage, `files/${file[0].name}`);
-    // const uploadTask = uploadBytesResumable(storageRef, lowCapacityFile);
-
-    // uploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     const progress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //   },
-    //   (error) => {
-    //     switch (error.code) {
-    //       case "storage/canceld":
-    //         alert("Upload has been canceled");
-    //         break;
-    //     }
-    //   },
-    //   () => {
-    //     getDownloadURL(storageRef).then((downloadURL) => {
-    //       console.log("File available at", downloadURL);
-
-    //       //   setImageURL(downloadURL);
-    //       const prev = getValues("images");
-    //       setValue("images", [...prev, downloadURL]);
-    //     });
-    //   }
-    // );
+    const urls = await postPpt(file[0]);
+    setPptSlides(urls);
   };
 
   return (
@@ -70,6 +39,7 @@ export default function ImageUpload() {
         onClick={onUploadImageButtonClick}
         sx={{ fontSize: "50px" }}
       />
+      <img src={"./img/icon001.png"} width={100} />
       <input
         hidden
         type="file"

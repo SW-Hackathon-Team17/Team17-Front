@@ -69,10 +69,15 @@ export default function Timer({ setPage }: any) {
       <Button
         sx={{
           mr: 5,
+          border: 0,
+          backgroundColor: "white",
           borderRadius: "50px",
           fontSize: "20px",
           px: "50px",
-          py: "10px",
+          py: "13px",
+          ":hover": {
+            backgroundColor: "gray",
+          },
         }}
         color="inherit"
         variant="outlined"
@@ -87,7 +92,7 @@ export default function Timer({ setPage }: any) {
             }}
             sx={{
               mr: 2,
-              backgroundColor: "red",
+              backgroundColor: "white",
               width: "15px",
               height: "15px",
               borderRadius: "20px",
@@ -97,7 +102,7 @@ export default function Timer({ setPage }: any) {
           <Box
             sx={{
               mr: 2,
-              backgroundColor: "red",
+              backgroundColor: "white",
               width: "15px",
               height: "15px",
               borderRadius: "20px",
@@ -109,13 +114,39 @@ export default function Timer({ setPage }: any) {
         {converter(seconds)}
       </Button>
       <Box sx={{ fontSize: "80px" }}>
-        <IconButton onClick={handlePlay}>
+        <IconButton
+          sx={{
+            color: "rgba(121, 93, 82, 1)",
+            backgroundColor: "white",
+            width: "60px",
+            height: " 60px",
+          }}
+          onClick={handlePlay}
+        >
           <PlayCircleFilledWhiteIcon sx={{ fontSize: "80px" }} />
         </IconButton>
-        <IconButton onClick={handleStop}>
+        <IconButton
+          sx={{
+            color: "rgba(121, 93, 82, 1)",
+            backgroundColor: "white",
+            width: "60px",
+            mx: 4,
+            height: " 60px",
+          }}
+          onClick={handleStop}
+        >
           <PauseCircleIcon sx={{ fontSize: "80px" }} />
         </IconButton>
-        <IconButton onClick={handleReset}>
+        <IconButton
+          sx={{
+            color: "rgba(121, 93, 82, 1)",
+            backgroundColor: "white",
+
+            width: "60px",
+            height: " 60px",
+          }}
+          onClick={handleReset}
+        >
           <StopCircleIcon sx={{ fontSize: "80px" }} />
         </IconButton>
       </Box>
