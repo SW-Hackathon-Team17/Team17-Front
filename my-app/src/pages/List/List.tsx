@@ -3,6 +3,7 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { IPpt, IPptList, getPptList } from "apis/ppt";
 import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
 export default function List() {
   const data = [
     {
@@ -50,12 +51,14 @@ export default function List() {
         }}
       >
         {data?.map((ppt: IPpt) => (
-          <Grid key={ppt.pptIdx}>
-            {" "}
-            <Paper sx={{ p: 5, width: "500px" }}>
-              <img src={ppt.imgUrl} style={{ width: "100%" }} />
-            </Paper>
-          </Grid>
+          <Link to={`/list/${ppt.pptIdx}`} state={ppt}>
+            <Grid key={ppt.pptIdx}>
+              {" "}
+              <Paper sx={{ p: 5, width: "500px" }}>
+                <img src={ppt.imgUrl} style={{ width: "100%" }} />
+              </Paper>
+            </Grid>
+          </Link>
         ))}
         <Paper
           sx={{
