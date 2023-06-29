@@ -1,8 +1,21 @@
-import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { useState } from "react";
 import CancelButton from "components/CancelButton";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import ScriptPage from "components/Add/ScriptPage";
 export default function Add() {
+  const [nowPage, setNowPage] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>(1);
+
   const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
 
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
@@ -76,10 +89,16 @@ export default function Add() {
             mb: "30px",
             pt: "10px",
             px: "10px",
-            pb: "50px",
+            pb: "90px",
             backgroundColor: "lightgray",
           }}
         >
+          <ScriptPage
+            nowPage={nowPage}
+            maxPage={maxPage}
+            setMaxPage={setMaxPage}
+            setNowPage={setNowPage}
+          />
           <Paper
             sx={{
               width: "100%",
@@ -100,7 +119,7 @@ export default function Add() {
               variant="contained"
               sx={{ mr: "10px", borderRadius: "25px" }}
             >
-              대본 수정
+              대본 저장
             </Button>
             <Button variant="contained" sx={{ borderRadius: "25px" }}>
               키워드 추출
@@ -116,6 +135,7 @@ export default function Add() {
 
             display: "flex",
             flexWrap: "wrap",
+            position: "relative",
           }}
         >
           {keywords.map((keyword, index) => (
@@ -136,6 +156,9 @@ export default function Add() {
               <Typography sx={{ fontSize: "17px" }}>{keyword}</Typography>
             </Box>
           ))}
+          <Typography sx={{ position: "absolute", bottom: "20px" }}>
+            키워드 클릭시 중요도 표시 가능합니다 :)
+          </Typography>
         </Paper>
       </Paper>
     </Box>
