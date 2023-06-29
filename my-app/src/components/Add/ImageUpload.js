@@ -16,10 +16,14 @@ export default function ImageUpload() {
     e.preventDefault();
 
     const file = e.target.files;
-
+    
     if (!file) return null;
-    console.log(file);
-    postPpt(file[0]);
+    console.log(file[0]);
+    const formData = new FormData(); 
+   
+    // file을 formData에 추가합니다.
+    formData.append("file", file[0]);
+    postPpt(formData).then( (res) => console.log(res));
 
     // const convertedFile = await Heic2Jpg(file[0]);
 
