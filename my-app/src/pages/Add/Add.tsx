@@ -6,13 +6,18 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { useState } from "react";
+
+import React, { useCallback, useRef, useState } from "react";
 import CancelButton from "components/CancelButton";
 import ScriptPage from "components/Add/ScriptPage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextareaDecorators from "components/Detail/TextareaDecorators";
 import KeywordButton from "components/KeywordButton";
+
+import Dictaphone from "components/Audio/B1Q3";
+import ImageUpload from "components/Add/ImageUpload";
+import SpeechToText from "components/Audio/SpeechToText";
+
 export default function Add() {
   const [script, setScript] = useState<string>("");
   const [nowPage, setNowPage] = useState<number>(1);
@@ -47,6 +52,8 @@ export default function Add() {
               alignItems: "center",
             }}
           >
+            {/* <Dictaphone /> */}
+            <SpeechToText />
             <CancelButton setLeftVisible={setLeftVisible} />
             <Paper
               sx={{
@@ -60,7 +67,7 @@ export default function Add() {
                 height: "70px",
               }}
             >
-              <FileUploadIcon sx={{ fontSize: "35px" }} />
+              <ImageUpload />
             </Paper>
           </Paper>
 

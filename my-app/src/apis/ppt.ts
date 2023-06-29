@@ -10,7 +10,7 @@ import axios from "axios";
  */
 
 export const getPptList = async () => {
-  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/form`);
+  const response = await axios.get(`/form`);
 
   return response.data;
 };
@@ -65,5 +65,14 @@ export const savePpt = async (pptSave: IPptSave) => {
     `${process.env.REACT_APP_BASE_URL}/form`,
     pptSave
   );
+  return response;
+};
+
+export const postPpt = async (formData: FormData) => {
+  const response = await axios.post(`/upload`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response;
 };
