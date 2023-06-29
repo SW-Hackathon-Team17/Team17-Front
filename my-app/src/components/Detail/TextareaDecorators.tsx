@@ -8,7 +8,8 @@ export default function TextareaDecorators({ script, setScript }: any) {
   const addEmoji = (emoji: string) => () => setScript(`${script}${emoji}`);
   return (
     <Textarea
-      placeholder="Type in here…"
+      color="neutral"
+      placeholder="대본을 입력해주세요"
       value={script}
       onChange={(event) => setScript(event.target.value)}
       minRows={2}
@@ -16,15 +17,18 @@ export default function TextareaDecorators({ script, setScript }: any) {
       style={{ width: "100%", height: "100%" }}
       startDecorator={
         <Box sx={{ display: "flex", gap: 0.5 }}>
-          {["✅", "❗️", "❓", "✨", "🔥", "❤️", "😀", "🥲"].map((emoji) => (
-            <IconButton
-              variant="outlined"
-              color="neutral"
-              onClick={addEmoji(`${emoji}`)}
-            >
-              {emoji}
-            </IconButton>
-          ))}
+          {["✅", "❗️", "❓", "✨", "🔥", "❤️", "😀", "🥲"].map(
+            (emoji, index) => (
+              <IconButton
+                key={index}
+                variant="outlined"
+                color="neutral"
+                onClick={addEmoji(`${emoji}`)}
+              >
+                {emoji}
+              </IconButton>
+            )
+          )}
         </Box>
       }
       endDecorator={
