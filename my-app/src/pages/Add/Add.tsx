@@ -16,6 +16,7 @@ import KeywordButton from "components/KeywordButton";
 
 import Dictaphone from "components/Audio/B1Q3";
 import ImageUpload from "components/Add/ImageUpload";
+import SpeechToText from "components/Audio/SpeechToText";
 
 export default function Add() {
   const [script, setScript] = useState<string>("");
@@ -51,7 +52,8 @@ export default function Add() {
               alignItems: "center",
             }}
           >
-            <Dictaphone />
+            {/* <Dictaphone /> */}
+            <SpeechToText />
             <CancelButton setLeftVisible={setLeftVisible} />
             <Paper
               sx={{
