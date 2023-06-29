@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 export default function List() {
   const data = [
     {
-      pptIdx: 1,
+      formIdx: 1,
       imgUrl:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
     },
     {
-      pptIdx: 2,
+      formIdx: 2,
       imgUrl:
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
     },
@@ -51,8 +51,8 @@ export default function List() {
         }}
       >
         {data?.map((ppt: IPpt) => (
-          <Link to={`/list/${ppt.pptIdx}`} state={ppt}>
-            <Grid key={ppt.pptIdx}>
+          <Link to={`/list/${ppt.formIdx}`} state={ppt}>
+            <Grid key={ppt.formIdx}>
               {" "}
               <Paper sx={{ p: 5, width: "500px" }}>
                 <img src={ppt.imgUrl} style={{ width: "100%" }} />

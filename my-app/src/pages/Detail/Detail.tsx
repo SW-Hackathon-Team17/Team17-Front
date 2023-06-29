@@ -15,6 +15,7 @@ import ScriptPage from "components/Add/ScriptPage";
 import KeywordButton from "components/KeywordButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ProgressBar from "components/Detail/ProgressBar";
 export default function Detail() {
   const [keywords, setKeywords] = useState(["봉사", "발표 시작", "Vollon"]);
   const { state } = useLocation();
@@ -33,6 +34,8 @@ export default function Detail() {
   console.log(state);
 
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
+
+  const [progress, setProgress] = useState<number>(30);
 
   return (
     <Box sx={{ p: "100px", display: "flex", justifyContent: "center" }}>
@@ -142,8 +145,16 @@ export default function Detail() {
             {isScriptVisible && <p>script</p>}
           </Paper>
         </Box>
+        <Typography variant="body1" sx={{ mb: "10px" }}>
+          키워드 성공률
+        </Typography>
+        <ProgressBar progress={progress} />
 
-        <Button variant="contained">발표 연습완료</Button>
+        {nowPage === maxPage && (
+          <Button variant="contained" sx={{ mt: 2 }}>
+            발표 연습완료
+          </Button>
+        )}
       </Paper>
     </Box>
   );
