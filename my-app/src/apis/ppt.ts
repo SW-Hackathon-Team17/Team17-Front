@@ -1,8 +1,13 @@
 import axios from "axios";
 
-// 유저의 모든 ppt 가져오기
-// HttpMethod : GET
-// uri : /form
+/**
+ * @description 유저의 모든 ppt 가져오기
+ * @async
+ * @function getPptList
+ * @method GET
+ * @param {/form} url
+ * @returns {IPptList}
+ */
 
 export const getPptList = async () => {
   const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/form`);
@@ -19,9 +24,14 @@ export interface IPptList {
   pptList: IPpt[];
 }
 
-// 한 ppt의 모든 slides 가져오기
-// HttpMethod : GET
-// uri : /form/{formIdx}
+/**
+ * @description 한 ppt의 모든 slides 가져오기
+ * @async
+ * @function IPptSlideList
+ * @method GET
+ * @param {/form/{formIdx}} url
+ * @returns {IPptSlideList}
+ */
 export interface IPptSlide {
   pptIdx: number;
   imgUrl: string;
@@ -38,9 +48,13 @@ export const getPptSlideList = async (formIdx: number) => {
   return response.data;
 };
 
-// ppt 저장 api
-// HttpMethod : POST
-// uri : /form
+/**
+ * @description ppt 저장 api
+ * @async
+ * @function savePpt
+ * @method POST
+ * @param {/form} url
+ */
 
 interface IPptSave {
   imgUrl: string[];
