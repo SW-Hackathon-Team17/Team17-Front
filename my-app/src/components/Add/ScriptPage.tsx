@@ -1,6 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { useMatch } from "react-router-dom";
 
 interface IProps {
   nowPage: Number;
@@ -15,10 +16,13 @@ export default function ScriptPage({
   setMaxPage,
   setNowPage,
 }: IProps) {
+  const addMatch = useMatch("/add");
+
   const handlePage = (e: any) => {
     const id = e.currentTarget.id;
     if (id === "right") {
       if (nowPage === maxPage) {
+        if (!addMatch) return;
         setMaxPage((prev: number) => prev + 1);
       }
       setNowPage((prev: number) => prev + 1);

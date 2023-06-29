@@ -16,15 +16,17 @@ import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import Timer from "components/Detail/Timer";
+import ScriptPage from "components/Add/ScriptPage";
 export default function Detail() {
   const { state } = useLocation();
 
   const stateTyped = state as IPpt;
 
-  const [page, setPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    setNowPage(value);
   };
   console.log(state);
 
@@ -69,11 +71,11 @@ export default function Detail() {
                 mx: "auto",
               }}
               count={10}
-              page={page}
+              page={nowPage}
               onChange={handleChange}
             />
           </Paper>
-          <Timer setPage={setPage} />
+          <Timer setNowPage={setNowPage} />
         </Box>
       )}
 
@@ -87,9 +89,16 @@ export default function Detail() {
           zIndex: 10,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "space-between",
         }}
       >
+        <ScriptPage
+          nowPage={nowPage}
+          maxPage={maxPage}
+          setMaxPage={setMaxPage}
+          setNowPage={setNowPage}
+        />
+
         <Paper
           sx={{
             width: "100%",
