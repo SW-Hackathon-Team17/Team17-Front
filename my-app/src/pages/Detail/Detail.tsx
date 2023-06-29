@@ -53,6 +53,13 @@ export default function Detail() {
 
   const [progress, setProgress] = useState<number>(30);
 
+  const sortKeywords = () => {
+    const sortedKeywords = keywords.sort((a, b) => {
+      return b.level - a.level;
+    });
+    return sortedKeywords;
+  };
+
   return (
     <Box sx={{ p: "100px", display: "flex", justifyContent: "center" }}>
       <Box
@@ -148,7 +155,7 @@ export default function Detail() {
                 minHeight: "300px",
               }}
             >
-              {keywords.map((keyword, index) => (
+              {sortKeywords().map((keyword, index) => (
                 <KeywordButton
                   key={index}
                   text={keyword.keyword}
@@ -157,6 +164,7 @@ export default function Detail() {
                 />
               ))}
             </Box>
+            <hr />
             <Button
               color="primary"
               sx={{

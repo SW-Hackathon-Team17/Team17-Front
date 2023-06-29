@@ -25,6 +25,8 @@ import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function Add() {
+  const [pptSlides, setPptSlides] = useState([]);
+
   const [script, setScript] = useState<string>("");
   const [nowPage, setNowPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(1);
@@ -113,7 +115,7 @@ export default function Add() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "inherit",
+                backgroundColor: "white",
                 border: 1,
                 borderStyle: "dotted",
                 // borderRadius: "100%",
@@ -121,7 +123,7 @@ export default function Add() {
                 height: "400px",
               }}
             >
-              <ImageUpload />
+              <ImageUpload setPptSlides={setPptSlides} />
               <Typography
                 variant="h4"
                 sx={{
