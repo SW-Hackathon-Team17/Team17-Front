@@ -27,12 +27,12 @@ export default function Detail() {
   const [nowPage, setNowPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 
-  useEffect(() => {
-    getData(stateTyped.formIdx, nowPage).then((res) => {
-      setScript(res[0].script);
-      setKeywords(res[1]);
-    });
-  }, [nowPage]);
+  // useEffect(() => {
+  //   getData(stateTyped.formIdx, nowPage).then((res) => {
+  //     setScript(res[0].script);
+  //     setKeywords(res[1]);
+  //   });
+  // }, [nowPage]);
 
   const [keywords, setKeywords] = useState([
     { keyword: "봉사", level: 1 },
@@ -69,6 +69,7 @@ export default function Detail() {
           left: 0,
           top: 0,
           width: "100%",
+          opacity: "0.7",
         }}
         src={"https://team17-buckets.s3.ap-northeast-2.amazonaws.com/002.png"}
       />
@@ -86,7 +87,7 @@ export default function Detail() {
               px: "30px",
               pt: "50px",
               pb: "70px",
-              backgroundColor: "lightgray",
+              backgroundColor: "rgba(255,255,255,0.7)",
             }}
           >
             <Box
@@ -124,7 +125,7 @@ export default function Detail() {
           flexDirection: "column",
           alignItems: "space-between",
 
-          backgroundColor: "lightgray",
+          backgroundColor: "rgba(255,255,255,0.7)",
         }}
       >
         <ScriptPage

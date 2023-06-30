@@ -32,7 +32,13 @@ export default function List() {
   return (
     <Box sx={{ px: "100px", py: "70px" }}>
       <Box
-        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
+        sx={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: "100%",
+          opacity: "0.7",
+        }}
         component="img"
         src="./img/background.png"
       />

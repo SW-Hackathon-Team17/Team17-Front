@@ -93,7 +93,13 @@ export default function Add() {
       }}
     >
       <Box
-        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
+        sx={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: "100%",
+          opacity: "0.7",
+        }}
         component="img"
         src="./img/background.png"
       />
