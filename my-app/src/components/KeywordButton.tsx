@@ -24,7 +24,7 @@ export default function KeywordButton({ text, index, level, onClick }: IProps) {
         justifyContent: "center",
         alignItems: "center",
         px: "20px",
-        height: "35px",
+
         color: "white",
       }}
       key={index}
