@@ -1,4 +1,4 @@
-<img width="1066" alt="image" src="https://github.com/SW-Hackathon-Team17/Team17-Front/assets/49269218/9010675e-e7cc-4ee3-9bcc-5516b9c19cc5"># Team17-Front
+
 ![transparent](https://capsule-render.vercel.app/api?type=waving&fontColor=FFFFFF&text=2023-SW-공동해커톤&height=230&fontAlignY=40&fontSize=60&desc=Team.개발새발&descAlignY=65&descAlign=74&color=703ee5&)
 
 
@@ -25,26 +25,37 @@
 
 <h1>프로젝트 소개</h1>
 
-프로젝트 명 : 마이크 테스트
-팀명 : 개발새발 팀
+<img width="434" alt="logo-v2(opacity100)" src="https://github.com/SW-Hackathon-Team17/Team17-Front/assets/49269218/9c570c41-6539-4a85-a67f-0e5a43471f02">
 
-발표는 아이디어를 현실로 만들어 줄 수 있는 첫 단추입니다.
-하지만 실제로 대부분의 사람들이 '발표 어려움' , '발표 불안' 등 발표에 어려움을 겪고 있습니다.
+<h3>[프로젝트 명] 마이크 테스트<h6/>
+<hr/><br />
 
-저희 개발새발 팀은 발표에 어려움을 겪는 모든 사람에게 발표력을 상승 시켜줄 수 있는 서비스를 만들었습니다.
+<h4>발표는 아이디어를 현실로 만들어 줄 수 있는 첫 단추입니다.<br /><br />
+하지만 실제로 대부분의 사람들이 '발표 어려움' , '발표 불안' 등 발표에 어려움을 겪고 있습니다.<br />
+<br />
+
+저희 개발새발 팀은 발표에 어려움을 겪는 모든 사람에게 발표력을 상승 시켜줄 수 있는 서비스를 만들었습니다.<br /><br />
 이 서비스는 발표력 상승을 통해 당신의 기회를 넓히고 아이디어를 명확하게 해줄 것입니다.
+</h4>
 
-주요 기능
-1) 발표 대본 키워드 분석 및 추출
+<br/>
+<h3>[주요 기능]</h3>
+<hr />
+<br />
+
+1. 발표 대본 키워드 분석 및 추출
 - 사용자의 대본에 대한 chat gpt api를 호출하여 키워드 반환
 
-2) 발표 준비 시각화
+<br/>
+
+2. 발표 준비 시각화
 - 키워드의 중요도 표시
 - 사용자의 음성 인식
 - 사용자의 음성에서 키워드 추출
 - 추출된 키워드를 통해 실시간 대본 키워드 처리
 - 발표 연습 완료 후 발표 완성도 시각화
 
+<br/>
 개발 스택
 
 Front-End
