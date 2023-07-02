@@ -27,19 +27,32 @@ export default function ImageUpload({ setPptSlides }) {
 
   return (
     <Box
-      component={motion.div}
-      initial={{ y: 0 }}
-      animate={{ y: [0, -10, 0, 0, 0 - 5, 0] }}
-      transition={{
-        repeat: Infinity,
-        repeatDelay: 2,
+      sx={{
+        border: 1,
+        borderStyle: "dotted",
+        px: "130px",
+        py: "30px",
       }}
     >
-      <FileUploadIcon
-        onClick={onUploadImageButtonClick}
+      {/* <FileUploadIcon
+        
         sx={{ fontSize: "50px" }}
-      />
-      <img src={"./img/icon001.png"} width={100} />
+      /> */}
+      <Box
+        component={motion.div}
+        initial={{ y: 0 }}
+        animate={{ y: [0, -10, 0, 0, 0 - 5, 0] }}
+        transition={{
+          repeat: Infinity,
+          repeatDelay: 2,
+        }}
+      >
+        <img
+          onClick={onUploadImageButtonClick}
+          src={"./img/icon001.png"}
+          width={100}
+        />
+      </Box>
       <input
         hidden
         type="file"

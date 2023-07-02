@@ -5,6 +5,7 @@ import {
   Grid,
   IconButton,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 
@@ -23,6 +24,7 @@ import { saveKeywords } from "apis/keyword";
 import zIndex from "@mui/material/styles/zIndex";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
+import NewKeyword from "components/Add/NewKeyword";
 
 export default function Add() {
   const [pptSlides, setPptSlides] = useState([]);
@@ -91,7 +93,13 @@ export default function Add() {
       }}
     >
       <Box
-        sx={{ position: "fixed", left: 0, top: 0, width: "100%" }}
+        sx={{
+          position: "fixed",
+          left: 0,
+          top: 0,
+          width: "100%",
+          opacity: "0.7",
+        }}
         component="img"
         src="./img/background.png"
       />
@@ -117,22 +125,23 @@ export default function Add() {
                 alignItems: "center",
                 backgroundColor: "white",
                 border: 1,
-                borderStyle: "dotted",
-                // borderRadius: "100%",
+                borderColor: "lightgray",
+
+                borderRadius: "10px",
                 width: "500px",
                 height: "400px",
               }}
             >
               <ImageUpload setPptSlides={setPptSlides} />
               <Typography
-                variant="h4"
+                variant="h5"
                 sx={{
                   position: "absolute",
-                  bottom: 400,
+                  top: 120,
                   color: "black",
                 }}
               >
-                PPT 놓기
+                File Upload
               </Typography>
             </Box>
           </Paper>
@@ -244,6 +253,7 @@ export default function Add() {
               />
             </Box>
           ))}
+          <NewKeyword setKeywords={setKeywords} />
 
           <Typography
             sx={{ position: "absolute", bottom: "5px", fontWeight: "400" }}
