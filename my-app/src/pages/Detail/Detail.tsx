@@ -18,7 +18,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ProgressBar from "components/Detail/ProgressBar";
 import { useQueries } from "@tanstack/react-query";
 import { getData, getScript } from "apis/script";
-import { m } from "framer-motion";
+import { AnimatePresence, m, motion } from "framer-motion";
 import { getKeywords } from "apis/keyword";
 import SpeechToText from "components/Audio/SpeechToText";
 
@@ -157,14 +157,23 @@ export default function Detail() {
                 minHeight: "300px",
               }}
             >
-              {sortKeywords().map((keyword, index) => (
-                <KeywordButton
-                  key={index}
-                  text={keyword.keyword}
-                  index={index}
-                  level={keyword.level}
-                />
-              ))}
+              <AnimatePresence>
+                {sortKeywords().map((keyword, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <KeywordButton
+                      text={keyword.keyword}
+                      index={index}
+                      level={keyword.level}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </Box>
             <hr />
             <Button

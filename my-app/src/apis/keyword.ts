@@ -66,7 +66,7 @@ export const getKeywordFromScript = async (field: string, script: string) => {
   const requestBody = { field: field, script: script };
   const response = await axios.post(
     `${process.env.REACT_APP_BASE_URL}/ai/chatgpt`,
-    requestBody
+    { field: field, script: script }
   );
   return response;
 };

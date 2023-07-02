@@ -19,10 +19,12 @@ export default function GetKeywordButton({
 }: IProps) {
   const handleGetKeyword = () => {
     getKeywordFromScript(field, script).then((res: any) => {
-      for (let i = 0; i < res.data.length; i++) {
+      const newKeys = Object.keys(res.data);
+
+      for (let i = 0; i < newKeys.length; i++) {
         setKeywords((prev: keyword[]) => [
           ...prev,
-          { keyword: res.data[i], level: 1 },
+          { keyword: newKeys[i], level: 1 },
         ]);
       }
     });

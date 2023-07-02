@@ -27,6 +27,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import NewKeyword from "components/Add/NewKeyword";
 import GetKeywordButton from "components/Add/GetKeywordButton";
 import Subject from "components/Add/Subject";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Add() {
   const [pptSlides, setPptSlides] = useState([]);
@@ -249,30 +250,40 @@ export default function Add() {
             position: "relative",
           }}
         >
-          {keywords.map((keyword, index) => (
-            <Box sx={{ position: "relative" }}>
-              <IconButton
-                sx={{
-                  width: "20px",
-                  height: "20px",
-                  position: "absolute",
-                  right: "-10px",
-                  top: "-10px",
-                  zIndex: "10",
-                }}
-                onClick={() => handleClick(index)}
-              >
-                <CancelIcon />
-              </IconButton>
-              <KeywordButton
+          <AnimatePresence>
+            {keywords.map((keyword, index) => (
+              <motion.div
                 key={index}
-                text={keyword.keyword}
-                level={keyword.level}
-                index={index}
-                onClick={handleLevelBalance}
-              />
-            </Box>
-          ))}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                style={{ position: "relative" }}
+              >
+                <IconButton
+                  sx={{
+                    width: "20px",
+                    height: "20px",
+                    position: "absolute",
+                    right: "-10px",
+                    top: "-10px",
+                    zIndex: "10",
+                  }}
+                  onClick={() => handleClick(index)}
+                >
+                  <CancelIcon />
+                </IconButton>
+                <KeywordButton
+                  key={index}
+                  text={keyword.keyword}
+                  level={keyword.level}
+                  index={index}
+                  onClick={handleLevelBalance}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
           <NewKeyword setKeywords={setKeywords} />
 
           <Typography
