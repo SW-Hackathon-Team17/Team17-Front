@@ -23,6 +23,7 @@ import { getKeywords } from "apis/keyword";
 import SpeechToText from "components/Audio/SpeechToText";
 
 import image from "./img/background.png";
+import styled from "styled-components";
 export default function Detail() {
   const [nowPage, setNowPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
@@ -51,7 +52,7 @@ export default function Detail() {
 
   const [leftVisible, setLeftVisible] = useState<boolean>(true);
 
-  const [progress, setProgress] = useState<number>(30);
+  const [progress, setProgress] = useState<number>(0);
 
   const sortKeywords = () => {
     const sortedKeywords = keywords.sort((a, b) => {
@@ -185,13 +186,16 @@ export default function Detail() {
             {isScriptVisible && <p>{script}</p>}
           </Paper>
         </Box>
-        <Typography variant="body1" sx={{ mb: "0px" }}>
+        <Typography variant="body1" sx={{ mb: "0px", fontSize: "20px" }}>
           키워드 성공률
         </Typography>
         <ProgressBar progress={progress} />
 
         {nowPage === maxPage && (
-          <Button variant="contained" sx={{ mt: 2 }}>
+          <Button
+            variant="contained"
+            sx={{ mt: 2, backgroundColor: "#88A0AB" }}
+          >
             발표 연습완료
           </Button>
         )}
