@@ -8,13 +8,13 @@ export default function TextareaDecorators({ script, setScript }: any) {
   const addEmoji = (emoji: string) => () => setScript(`${script}${emoji}`);
   return (
     <Textarea
-      color="neutral"
+      color="danger"
       placeholder="대본을 입력해주세요"
       value={script}
       onChange={(event) => setScript(event.target.value)}
       minRows={2}
       maxRows={4}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "220px" }}
       startDecorator={
         <Box sx={{ display: "flex", gap: 0.5 }}>
           {["✅", "❗️", "❓", "✨", "🔥", "❤️", "😀", "🥲"].map(

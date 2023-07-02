@@ -61,3 +61,12 @@ export const updateKeywords = async (
   );
   return response;
 };
+
+export const getKeywordFromScript = async (field: string, script: string) => {
+  const requestBody = { field: field, script: script };
+  const response = await axios.post(
+    `${process.env.REACT_APP_BASE_URL}/ai/chatgpt`,
+    requestBody
+  );
+  return response;
+};

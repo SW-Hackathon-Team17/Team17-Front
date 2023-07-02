@@ -20,11 +20,13 @@ import Dictaphone from "components/Audio/B1Q3";
 import ImageUpload from "components/Add/ImageUpload";
 import SpeechToText from "components/Audio/SpeechToText";
 import { postData, saveScript } from "apis/script";
-import { saveKeywords } from "apis/keyword";
+import { getKeywordFromScript, saveKeywords } from "apis/keyword";
 import zIndex from "@mui/material/styles/zIndex";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
 import NewKeyword from "components/Add/NewKeyword";
+import GetKeywordButton from "components/Add/GetKeywordButton";
+import Subject from "components/Add/Subject";
 
 export default function Add() {
   const [pptSlides, setPptSlides] = useState([]);
@@ -82,6 +84,8 @@ export default function Add() {
       ]);
     }
   };
+
+  const [field, setField] = useState<string>("");
 
   return (
     <Box
@@ -212,11 +216,11 @@ export default function Add() {
             setMaxPage={setMaxPage}
             setNowPage={setNowPage}
           />
+          <Subject field={field} setField={setField} />
           <TextareaDecorators script={script} setScript={setScript} />
           <Box
             sx={{
               height: "50px",
-
               display: "flex",
               alignItems: "center",
               justifyContent: "end",
@@ -226,19 +230,11 @@ export default function Add() {
               <DeleteIcon />
             </IconButton> */}
             <Box>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#386E7E",
-
-                  ":hover": {
-                    backgroundColor: "#6C85BD", // Or whatever color you want
-                    // Override other styles on hover if needed
-                  },
-                }}
-              >
-                키워드 추출
-              </Button>
+              <GetKeywordButton
+                field={field}
+                script={script}
+                setKeywords={setKeywords}
+              />
             </Box>
           </Box>
         </Paper>
