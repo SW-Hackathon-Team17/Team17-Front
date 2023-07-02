@@ -69,10 +69,14 @@ export const savePpt = async (pptSave: IPptSave) => {
 };
 
 export const postPpt = async (formData: FormData) => {
-  const response = await axios.post(`/upload`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  return response;
+  const response = await axios.post(
+    `${process.env.REACT_APP_BASE_URL}/upload`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
 };

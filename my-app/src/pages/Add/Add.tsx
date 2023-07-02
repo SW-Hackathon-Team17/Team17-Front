@@ -132,17 +132,41 @@ export default function Add() {
                 height: "400px",
               }}
             >
-              <ImageUpload setPptSlides={setPptSlides} />
-              <Typography
-                variant="h5"
-                sx={{
-                  position: "absolute",
-                  top: 120,
-                  color: "black",
-                }}
-              >
-                File Upload
-              </Typography>
+              {pptSlides.length === 0 ? (
+                <>
+                  <ImageUpload
+                    setPptSlides={setPptSlides}
+                    setMaxPage={setMaxPage}
+                  />
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      position: "absolute",
+                      top: 120,
+                      color: "black",
+                    }}
+                  >
+                    File Upload
+                  </Typography>
+                </>
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 30,
+                  }}
+                >
+                  <Box
+                    component={"img"}
+                    src={pptSlides[nowPage - 1]}
+                    sx={{ width: "100%" }}
+                  />
+                </Box>
+              )}
             </Box>
           </Paper>
 

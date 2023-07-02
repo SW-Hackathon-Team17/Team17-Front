@@ -4,7 +4,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { postPpt } from "apis/ppt";
 import { motion } from "framer-motion";
 import { Box, Typography } from "@mui/material";
-export default function ImageUpload({ setPptSlides }) {
+export default function ImageUpload({ setPptSlides, setMaxPage }) {
   const inputRef = useRef(null);
   const onUploadImageButtonClick = useCallback(() => {
     if (!inputRef.current) {
@@ -20,9 +20,15 @@ export default function ImageUpload({ setPptSlides }) {
     const file = e.target.files;
 
     if (!file) return null;
-    console.log(file);
-    const urls = await postPpt(file[0]);
+
+    const formData = new FormData();
+    formData.append("file", file[0]);
+
+    const urls = await postPpt(formData);
+
     setPptSlides(urls);
+    setMaxPage(urls.length);
+    console.log(urls);
   };
 
   return (

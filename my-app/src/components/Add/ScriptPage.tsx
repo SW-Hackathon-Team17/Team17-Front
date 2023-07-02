@@ -48,7 +48,7 @@ export default function ScriptPage({
       <Typography variant="body1" sx={{ mb: 1 }}>
         {nowPage + " / " + maxPage}
       </Typography>
-      {addMatch && isPresentation === false && (
+      {maxPage !== 1 && (
         <Box>
           <IconButton id="left" onClick={handlePage}>
             <KeyboardArrowLeftIcon sx={{ mr: 2 }} />
