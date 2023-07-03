@@ -99,7 +99,7 @@
 |<img src="https://github.com/0lrlokr.png" width="80">|<img src="https://github.com/Kimminsu16.png" width="80">|<img src="https://github.com/ohinhyuk.png" width="80">|<img src="https://github.com/YurimYang.png" width="80">|<img src="https://github.com/wkdsh21.png" width="80">|
 |:---:|:---:|:---:|:---:|:---:|
 |[](https://github.com/0lrlokr)|[](https://github.com/Kimminsu16)|[](https://github.com/ohinhyuk)|[](https://github.com/YurimYang)|[](https://github.com/wkdsh21)|
-|이은주|김민수|오인혁|양유림|정승한
+|이은주|김민수|오인혁|양유림|장승한
 |디자이너|AI개발자|프론트엔드|백엔드|백엔드
 
 <br/>
